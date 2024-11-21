@@ -1,25 +1,25 @@
-import logo from './logo.svg';
-import './App.css';
+import { useState } from "react";
+import Banner from "./components/Banner";
+import { Form } from "./components/Form/Form";
 
 function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+    const [teamMembers, setTeamMembers] = useState([]);
+
+    const onNewTeamMemberRegister = (newTeamMember) => {
+        console.log(newTeamMember);
+        setTeamMembers([...teamMembers, newTeamMember]);
+    };
+
+    return (
+        <div className="App">
+            <Banner />
+            <Form
+                onRegister={(newTeamMember) =>
+                    onNewTeamMemberRegister(newTeamMember)
+                }
+            />
+        </div>
+    );
 }
 
 export default App;
