@@ -5,16 +5,6 @@ import TextInput from "../TextInput";
 import "./Form.css";
 
 export const Form = (props) => {
-    const teams = [
-        "Programação",
-        "Frontend",
-        "Data Science",
-        "Devops",
-        "Ux e Design",
-        "Mobile",
-        "Inovação e Gestão",
-    ];
-
     const [name, setName] = useState("");
     const [position, setPosition] = useState("");
     const [image, setImage] = useState("");
@@ -23,7 +13,10 @@ export const Form = (props) => {
     const onSave = (event) => {
         event.preventDefault();
         props.onRegister({ name, position, image, team });
-        // console.log("Form submitted => ", name, position, image, team);
+        setName("");
+        setPosition("");
+        setImage("");
+        setTeam("");
     };
 
     return (
@@ -53,7 +46,7 @@ export const Form = (props) => {
                 <DropdownList
                     required={true}
                     label="Time"
-                    items={teams}
+                    items={props.teams}
                     value={team}
                     onChange={(value) => setTeam(value)}
                 />
