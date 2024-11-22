@@ -14,9 +14,11 @@ export const Team = (props) => {
                 <div className="team-members">
                     {props.teamMembers.map((teamMember) => (
                         <TeamMember
+                            key={teamMember.name}
                             name={teamMember.name}
                             position={teamMember.position}
                             image={teamMember.image}
+                            color={props.primaryColor}
                         />
                     ))}
                 </div>

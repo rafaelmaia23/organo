@@ -9,6 +9,7 @@ export const DropdownList = (props) => {
                 value={props.value}
                 onChange={(evento) => props.onChange(evento.target.value)}
             >
+                <option value="" disabled></option>
                 {props.items.map((item) => (
                     <option key={item}>{item}</option>
                 ))}

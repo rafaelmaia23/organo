@@ -46,7 +46,6 @@ function App() {
     const [teamMembers, setTeamMembers] = useState([]);
 
     const onNewTeamMemberRegister = (newTeamMember) => {
-        console.log(newTeamMember);
         setTeamMembers([...teamMembers, newTeamMember]);
     };
 
