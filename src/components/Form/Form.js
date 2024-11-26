@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { Button } from "../Button/Button";
 import { DropdownList } from "../DropdownList/DropdownList";
-import TextInput from "../TextInput";
+import Input from "../Input";
 import "./Form.css";
 
 export const Form = ({ onRegister, teams, onTeamRegister }) => {
@@ -23,24 +23,24 @@ export const Form = ({ onRegister, teams, onTeamRegister }) => {
     };
 
     return (
-        <section className="form">
-            <form onSubmit={onSave}>
+        <section className="form-container">
+            <form className="form" onSubmit={onSave}>
                 <h2>Preencha os dados para criar o card do colaborador</h2>
-                <TextInput
+                <Input
                     required={true}
                     label="Nome"
                     placeholder="Digite seu nome"
                     value={name}
                     onChange={(value) => setName(value)}
                 />
-                <TextInput
+                <Input
                     required={true}
                     label="Cargo"
                     placeholder="Digite seu cargo"
                     value={position}
                     onChange={(value) => setPosition(value)}
                 />
-                <TextInput
+                <Input
                     label="Imagem"
                     placeholder="Digite o endereço da imagem"
                     value={image}
@@ -56,25 +56,27 @@ export const Form = ({ onRegister, teams, onTeamRegister }) => {
                 <Button>Criar Card</Button>
             </form>
             <form
+                className="form"
                 onSubmit={(event) => {
                     event.preventDefault();
                     onTeamRegister({ name: teamName, color: teamColor });
                 }}
             >
                 <h2>Preencha os dados para criar um novo time.</h2>
-                <TextInput
+                <Input
                     required={true}
                     label="Nome"
                     placeholder="Digite o nome do time"
                     value={teamName}
                     onChange={(value) => setTeamName(value)}
                 />
-                <TextInput
+                <Input
                     required={true}
-                    label="color"
+                    label="Cor"
                     placeholder="Digite a cor do time"
                     value={teamColor}
                     onChange={(value) => setTeamColor(value)}
+                    type="color"
                 />
                 <Button>Criar um novo time</Button>
             </form>

@@ -1,7 +1,17 @@
-import { AiFillCloseCircle } from "react-icons/ai";
+import { AiFillCloseCircle, AiFillHeart, AiOutlineHeart } from "react-icons/ai";
 import "./TeamMember.css";
 
-export const TeamMember = ({ teamMember, color, onDelete }) => {
+export const TeamMember = ({ teamMember, color, onDelete, onFavorite }) => {
+    const onFavoriteClick = () => {
+        onFavorite(teamMember.id);
+    };
+
+    const propsFavoriteIcon = {
+        size: 25,
+        color: "red",
+        onClick: onFavoriteClick,
+    };
+
     return (
         <div className="team-member">
             <AiFillCloseCircle
@@ -18,6 +28,13 @@ export const TeamMember = ({ teamMember, color, onDelete }) => {
             <div className="team-member--footer">
                 <h4>{teamMember.name}</h4>
                 <h5>{teamMember.position}</h5>
+                <div className="favorite">
+                    {teamMember.favorite ? (
+                        <AiFillHeart {...propsFavoriteIcon} />
+                    ) : (
+                        <AiOutlineHeart {...propsFavoriteIcon} color="black" />
+                    )}
+                </div>
             </div>
         </div>
     );

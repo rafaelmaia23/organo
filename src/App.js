@@ -46,6 +46,7 @@ function App() {
 
     const seedForTeamMembers = [
         {
+            favorite: false,
             id: uuidv4(),
             name: "JULIANA AMOASEI",
             position: "Software Developer and Instructor",
@@ -53,6 +54,7 @@ function App() {
             team: teams[0].name,
         },
         {
+            favorite: false,
             id: uuidv4(),
             name: "DANIEL ARTINE",
             position: "Software Engineer at Stone Age",
@@ -60,6 +62,7 @@ function App() {
             team: teams[0].name,
         },
         {
+            favorite: false,
             id: uuidv4(),
             name: "GUILHERME LIMA",
             position: "Python and JavaScript Developer at Alura",
@@ -67,6 +70,7 @@ function App() {
             team: teams[0].name,
         },
         {
+            favorite: false,
             id: uuidv4(),
             name: "PAULO SILVEIRA",
             position: "Hipster and CEO at Alura",
@@ -74,6 +78,7 @@ function App() {
             team: teams[0].name,
         },
         {
+            favorite: false,
             id: uuidv4(),
             name: "JULIANA AMOASEI",
             position: "Software Developer and Instructor",
@@ -81,6 +86,7 @@ function App() {
             team: teams[1].name,
         },
         {
+            favorite: false,
             id: uuidv4(),
             name: "DANIEL ARTINE",
             position: "Software Engineer at Stone Age",
@@ -88,6 +94,7 @@ function App() {
             team: teams[1].name,
         },
         {
+            favorite: false,
             id: uuidv4(),
             name: "GUILHERME LIMA",
             position: "Python and JavaScript Developer at Alura",
@@ -95,6 +102,7 @@ function App() {
             team: teams[1].name,
         },
         {
+            favorite: false,
             id: uuidv4(),
             name: "PAULO SILVEIRA",
             position: "Hipster and CEO at Alura",
@@ -102,6 +110,7 @@ function App() {
             team: teams[1].name,
         },
         {
+            favorite: false,
             id: uuidv4(),
             name: "JULIANA AMOASEI",
             position: "Software Developer and Instructor",
@@ -109,6 +118,7 @@ function App() {
             team: teams[2].name,
         },
         {
+            favorite: false,
             id: uuidv4(),
             name: "DANIEL ARTINE",
             position: "Software Engineer at Stone Age",
@@ -116,6 +126,7 @@ function App() {
             team: teams[2].name,
         },
         {
+            favorite: false,
             id: uuidv4(),
             name: "GUILHERME LIMA",
             position: "Python and JavaScript Developer at Alura",
@@ -123,6 +134,7 @@ function App() {
             team: teams[2].name,
         },
         {
+            favorite: false,
             id: uuidv4(),
             name: "PAULO SILVEIRA",
             position: "Hipster and CEO at Alura",
@@ -130,6 +142,7 @@ function App() {
             team: teams[2].name,
         },
         {
+            favorite: false,
             id: uuidv4(),
             name: "JULIANA AMOASEI",
             position: "Software Developer and Instructor",
@@ -137,6 +150,7 @@ function App() {
             team: teams[3].name,
         },
         {
+            favorite: false,
             id: uuidv4(),
             name: "DANIEL ARTINE",
             position: "Software Engineer at Stone Age",
@@ -144,6 +158,7 @@ function App() {
             team: teams[3].name,
         },
         {
+            favorite: false,
             id: uuidv4(),
             name: "GUILHERME LIMA",
             position: "Python and JavaScript Developer at Alura",
@@ -151,6 +166,7 @@ function App() {
             team: teams[3].name,
         },
         {
+            favorite: false,
             id: uuidv4(),
             name: "PAULO SILVEIRA",
             position: "Hipster and CEO at Alura",
@@ -158,6 +174,7 @@ function App() {
             team: teams[3].name,
         },
         {
+            favorite: false,
             id: uuidv4(),
             name: "JULIANA AMOASEI",
             position: "Software Developer and Instructor",
@@ -165,6 +182,7 @@ function App() {
             team: teams[4].name,
         },
         {
+            favorite: false,
             id: uuidv4(),
             name: "DANIEL ARTINE",
             position: "Software Engineer at Stone Age",
@@ -172,6 +190,7 @@ function App() {
             team: teams[4].name,
         },
         {
+            favorite: false,
             id: uuidv4(),
             name: "GUILHERME LIMA",
             position: "Python and JavaScript Developer at Alura",
@@ -179,6 +198,7 @@ function App() {
             team: teams[4].name,
         },
         {
+            favorite: false,
             id: uuidv4(),
             name: "PAULO SILVEIRA",
             position: "Hipster and CEO at Alura",
@@ -186,6 +206,7 @@ function App() {
             team: teams[4].name,
         },
         {
+            favorite: false,
             id: uuidv4(),
             name: "JULIANA AMOASEI",
             position: "Software Developer and Instructor",
@@ -193,6 +214,7 @@ function App() {
             team: teams[5].name,
         },
         {
+            favorite: false,
             id: uuidv4(),
             name: "DANIEL ARTINE",
             position: "Software Engineer at Stone Age",
@@ -200,6 +222,7 @@ function App() {
             team: teams[5].name,
         },
         {
+            favorite: false,
             id: uuidv4(),
             name: "GUILHERME LIMA",
             position: "Python and JavaScript Developer at Alura",
@@ -207,6 +230,7 @@ function App() {
             team: teams[5].name,
         },
         {
+            favorite: false,
             id: uuidv4(),
             name: "PAULO SILVEIRA",
             position: "Hipster and CEO at Alura",
@@ -233,6 +257,17 @@ function App() {
             })
         );
     }
+
+    const onFavorite = (id) => {
+        setTeamMembers(
+            teamMembers.map((teamMember) => {
+                if (teamMember.id === id) {
+                    teamMember.favorite = !teamMember.favorite;
+                }
+                return teamMember;
+            })
+        );
+    };
 
     const onNewTeamMemberRegister = (newTeamMember) => {
         setTeamMembers([...teamMembers, newTeamMember]);
@@ -263,6 +298,7 @@ function App() {
                             (teamMember) => teamMember.team === team.name
                         )}
                         onDelete={deleteTeamMember}
+                        onFavorite={onFavorite}
                     />
                 ))}
             </section>

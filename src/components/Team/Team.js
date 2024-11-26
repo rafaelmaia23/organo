@@ -2,7 +2,13 @@ import { TeamMember } from "../TeamMember/TeamMember";
 import "./Team.css";
 import hexToRgba from "hex-to-rgba";
 
-export const Team = ({ team, teamMembers, onDelete, changeTeamColor }) => {
+export const Team = ({
+    team,
+    teamMembers,
+    onDelete,
+    changeTeamColor,
+    onFavorite,
+}) => {
     return (
         teamMembers.length > 0 && (
             <section
@@ -28,6 +34,7 @@ export const Team = ({ team, teamMembers, onDelete, changeTeamColor }) => {
                             teamMember={teamMember}
                             color={team.color}
                             onDelete={onDelete}
+                            onFavorite={onFavorite}
                         />
                     ))}
                 </div>
