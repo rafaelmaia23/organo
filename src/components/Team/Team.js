@@ -1,24 +1,33 @@
 import { TeamMember } from "../TeamMember/TeamMember";
 import "./Team.css";
+import hexToRgba from "hex-to-rgba";
 
-export const Team = (props) => {
+export const Team = ({ team, teamMembers, onDelete, changeTeamColor }) => {
     return (
-        props.teamMembers.length > 0 && (
+        teamMembers.length > 0 && (
             <section
                 className="team"
-                style={{ backgroundColor: props.secondaryColor }}
+                style={{
+                    backgroundImage: "url(/images/fundo.png)",
+                    backgroundColor: hexToRgba(team.color, "0.4"),
+                }}
             >
-                <h3 style={{ borderColor: props.primaryColor }}>
-                    {props.name}
-                </h3>
+                <input
+                    onChange={(event) =>
+                        changeTeamColor(event.target.value, team.id)
+                    }
+                    value={team.color}
+                    type="color"
+                    className="input-color"
+                />
+                <h3 style={{ borderColor: team.color }}>{team.name}</h3>
                 <div className="team-members">
-                    {props.teamMembers.map((teamMember) => (
+                    {teamMembers.map((teamMember) => (
                         <TeamMember
                             key={teamMember.name}
-                            name={teamMember.name}
-                            position={teamMember.position}
-                            image={teamMember.image}
-                            color={props.primaryColor}
+                            teamMember={teamMember}
+                            color={team.color}
+                            onDelete={onDelete}
                         />
                     ))}
                 </div>
