@@ -22,6 +22,13 @@ export const Form = ({ onRegister, teams, onTeamRegister }) => {
         setTeam("");
     };
 
+    const onNewTeamSave = (event) => {
+        event.preventDefault();
+        onTeamRegister({ name: teamName, color: teamColor });
+        setTeamName("");
+        setTeamColor("#000000");
+    };
+
     return (
         <section className="form-container">
             <form className="form" onSubmit={onSave}>
@@ -55,13 +62,7 @@ export const Form = ({ onRegister, teams, onTeamRegister }) => {
                 />
                 <Button>Criar Card</Button>
             </form>
-            <form
-                className="form"
-                onSubmit={(event) => {
-                    event.preventDefault();
-                    onTeamRegister({ name: teamName, color: teamColor });
-                }}
-            >
+            <form className="form" onSubmit={onNewTeamSave}>
                 <h2>Preencha os dados para criar um novo time.</h2>
                 <Input
                     required={true}
