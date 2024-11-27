@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Banner from "./components/Banner";
 import Form from "./components/Form";
 import Team from "./components/Team";
@@ -243,6 +243,12 @@ function App() {
     ];
 
     const [teamMembers, setTeamMembers] = useState(seedForTeamMembers);
+
+    useEffect(() => {
+        fetch("http://localhost:8080/teamMembers")
+            .then((response) => response.json())
+            .then((data) => setTeamMembers(data));
+    }, []);
 
     function deleteTeamMember(id) {
         setTeamMembers(
