@@ -4,6 +4,7 @@ import Form from "./components/Form";
 import Team from "./components/Team";
 import { Footer } from "./components/Footer/Footer";
 import { v4 as uuidv4 } from "uuid";
+import { SiOpenmediavault } from "react-icons/si";
 
 function App() {
     const [teams, setTeams] = useState([
@@ -43,6 +44,8 @@ function App() {
             color: "#FF8A29",
         },
     ]);
+
+    const [isFormVisible, setIsFormVisible] = useState(true);
 
     const seedForTeamMembers = [
         {
@@ -277,6 +280,10 @@ function App() {
         setTeams([...teams, { ...newTeam, id: uuidv4() }]);
     };
 
+    const toggleFormVisibility = () => {
+        setIsFormVisible(!isFormVisible);
+    };
+
     return (
         <div className="App">
             <Banner />
@@ -286,9 +293,18 @@ function App() {
                     onNewTeamMemberRegister(newTeamMember)
                 }
                 onTeamRegister={onNewTeamRegister}
+                isVisible={isFormVisible}
             />
             <section className="teams">
-                <h1>Minha organização</h1>
+                <header className="teams-header">
+                    <h1>Minha organização</h1>
+                    <div
+                        className="teams-header-icon"
+                        onClick={toggleFormVisibility}
+                    >
+                        <SiOpenmediavault size={35} color="#FFF" />
+                    </div>
+                </header>
                 {teams.map((team, id) => (
                     <Team
                         changeTeamColor={changeTeamColor}

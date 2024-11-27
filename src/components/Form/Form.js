@@ -4,7 +4,7 @@ import { DropdownList } from "../DropdownList/DropdownList";
 import Input from "../Input";
 import "./Form.css";
 
-export const Form = ({ onRegister, teams, onTeamRegister }) => {
+export const Form = ({ onRegister, teams, onTeamRegister, isVisible }) => {
     const [name, setName] = useState("");
     const [position, setPosition] = useState("");
     const [image, setImage] = useState("");
@@ -29,8 +29,10 @@ export const Form = ({ onRegister, teams, onTeamRegister }) => {
         setTeamColor("#000000");
     };
 
+    const formDisplay = isVisible ? "flex" : "none";
+
     return (
-        <section className="form-container">
+        <section className="form-container" style={{ display: formDisplay }}>
             <form className="form" onSubmit={onSave}>
                 <h2>Preencha os dados para criar o card do colaborador</h2>
                 <Input
