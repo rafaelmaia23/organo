@@ -1,10 +1,16 @@
-import { useEffect, useState } from "react";
+import { useEffect, useReducer, useState } from "react";
 import Banner from "./components/Banner";
 import Form from "./components/Form";
 import Team from "./components/Team";
 import { Footer } from "./components/Footer/Footer";
 import { v4 as uuidv4 } from "uuid";
 import { SiOpenmediavault } from "react-icons/si";
+import teamMembersReducer, {
+    ADD_TEAM_MEMBER,
+    FAVORITE_TEAM_MEMBER,
+    REMOVE_TEAM_MEMBER,
+    SET_TEAM_MEMBERS,
+} from "./reducers/teamMembresReducer";
 
 function App() {
     const [teams, setTeams] = useState([
@@ -242,19 +248,33 @@ function App() {
         },
     ];
 
-    const [teamMembers, setTeamMembers] = useState(seedForTeamMembers);
+    // const [teamMembers, setTeamMembers] = useState(seedForTeamMembers);
+    const [teamMembers, dispatch] = useReducer(
+        teamMembersReducer,
+        seedForTeamMembers
+    );
+
+    const addTeamMember = (teamMember) => {
+        dispatch({ type: ADD_TEAM_MEMBER, teamMember });
+    };
+
+    const removeTeamMember = (id) => {
+        dispatch({ type: REMOVE_TEAM_MEMBER, id });
+    };
 
     useEffect(() => {
         fetch("http://localhost:8080/teamMembers")
             .then((response) => response.json())
-            .then((data) => setTeamMembers(data));
+            .then((data) => {
+                dispatch({ type: SET_TEAM_MEMBERS, payload: data });
+            });
     }, []);
 
-    function deleteTeamMember(id) {
-        setTeamMembers(
-            teamMembers.filter((teamMember) => teamMember.id !== id)
-        );
-    }
+    // function deleteTeamMember(id) {
+    //     setTeamMembers(
+    //         teamMembers.filter((teamMember) => teamMember.id !== id)
+    //     );
+    // }
 
     function changeTeamColor(color, id) {
         setTeams(
@@ -268,18 +288,12 @@ function App() {
     }
 
     const onFavorite = (id) => {
-        setTeamMembers(
-            teamMembers.map((teamMember) => {
-                if (teamMember.id === id) {
-                    teamMember.favorite = !teamMember.favorite;
-                }
-                return teamMember;
-            })
-        );
+        dispatch({ type: FAVORITE_TEAM_MEMBER, id });
     };
 
     const onNewTeamMemberRegister = (newTeamMember) => {
-        setTeamMembers([...teamMembers, newTeamMember]);
+        // setTeamMembers([...teamMembers, newTeamMember]);
+        addTeamMember(newTeamMember);
     };
 
     const onNewTeamRegister = (newTeam) => {
@@ -319,7 +333,7 @@ function App() {
                         teamMembers={teamMembers.filter(
                             (teamMember) => teamMember.team === team.name
                         )}
-                        onDelete={deleteTeamMember}
+                        onDelete={removeTeamMember}
                         onFavorite={onFavorite}
                     />
                 ))}
